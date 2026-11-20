@@ -1086,6 +1086,17 @@ async function makeShareCard(noImages = false) {
   const c = cv.getContext("2d");
   const deep = mix(d.color, "#2a1650", 0.38);
 
+  // iPhone (Safari / เบราว์เซอร์ในแอป IG, LINE) จัดกึ่งกลางข้อความภาษาไทยบน canvas ไม่ได้
+  // เลยคำนวณตำแหน่งกึ่งกลางเองแทน textAlign = "center"
+  const rawFill = c.fillText.bind(c);
+  c.fillText = (text, x, y, maxW) => {
+    if (c.textAlign !== "center") return maxW ? rawFill(text, x, y, maxW) : rawFill(text, x, y);
+    const w = Math.min(c.measureText(text).width, maxW || Infinity);
+    c.textAlign = "left";
+    if (maxW) rawFill(text, x - w / 2, y, maxW); else rawFill(text, x - w / 2, y);
+    c.textAlign = "center";
+  };
+
   try {
     await Promise.all([
       document.fonts.load('600 96px "Kodchasan"'),
