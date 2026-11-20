@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- รูปพรีวิวเวลาแชร์ลิงก์ (LINE / Facebook)
+       TODO: พอได้ลิงก์ Vercel ให้เปลี่ยน og:url และ og:image เป็นลิงก์เต็ม เช่น https://xxx.vercel.app/images/og.jpg -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Imagine City: คืนสุดท้าย ก่อนสีจะหายไป">
+  <meta property="og:description" content="ไฟในใจของเธอ คือดวงไหน? เล่นเกมค้นหาตัวตน 5 สาขา School of Digital Media">
+  <meta property="og:image" content="images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="description" content="ไฟในใจของเธอ คือดวงไหน? เล่นเกมค้นหาตัวตน 5 สาขา School of Digital Media">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/icon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta name="theme-color" content="#140b2e">
+  <title>Imagine City: คืนสุดท้ายก่อนสีจะหายไป</title>
+  <meta name="description" content="ควิซผจญภัยของ School of Digital Media: เธอคือนักเดินทางแบบไหน">
+
+  <!-- ฟอนต์ภาษาไทย -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@400;500;600;700&family=Mali:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=21">
+</head>
+<body>
+
+  <!-- ===== โลกด้านหลัง: ภาพฉากเมืองที่กลุ่มวาด (เริ่มเป็นสีเทา แล้วสีค่อย ๆ กลับมา) ===== -->
+  <div class="world" id="world" aria-hidden="true">
+    <img class="world__bg" id="worldBg"
+         src="images/bg.webp"
+         srcset="images/bg.webp 1920w, images/bg-2x.webp 2560w"
+         sizes="100vw" alt="">
+  </div>
+
+  <!-- ===== หน้าปก (ก่อนเริ่มเกม) ===== -->
+  <section class="cover" id="cover">
+    <h1 class="cover__title" id="coverTitle">Imagine City</h1>
+    <p class="cover__sub">คืนสุดท้าย ก่อนสีจะหายไป</p>
+
+    <!-- ตัวละครไฟทั้ง 5 (สร้างใน script.js) -->
+    <div class="cover__chars" id="coverChars"></div>
+    <p class="cover__ask">ไฟในใจของเธอ คือดวงไหน?</p>
+
+    <button class="btn cover__start" id="coverStart" type="button">เริ่มการเดินทาง</button>
+    <p class="cover__hint">เปิดเสียงเพื่อประสบการณ์ที่ดีที่สุด</p>
+
+  </section>
+
+  <!-- ===== แถบบน: นาฬิกา + ความคืบหน้า ===== -->
+  <header class="hud" id="hud">
+    <div class="clock" id="clock">23:00</div>
+    <div class="progress"><div class="progress__bar" id="progressBar"></div></div>
+  </header>
+
+  <!-- ===== เนื้อหาหลัก ===== -->
+  <main class="stage">
+    <!-- ดวงไฟนำทาง (วาดด้วย canvas ใน script.js) -->
+    <div class="flame-wrap">
+      <canvas id="flame" class="flame" aria-label="ดวงไฟนำทาง แตะเพื่อทักทาย"></canvas>
+      <!-- คำพูดของดวงไฟ -->
+      <div class="bubble" id="bubble" aria-live="polite"></div>
+    </div>
+
+    <!-- กล่องเนื้อหาที่เปลี่ยนไปทีละฉาก -->
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </main>
+
+  <!-- ปุ่มเปิด/ปิดเสียง -->
+  <button class="mute" id="muteBtn" type="button" aria-label="ปิดเสียง"></button>
+
+  <!-- หน้าต่างการ์ดแชร์ -->
+  <div class="modal" id="shareModal" hidden>
+    <div class="modal__box">
+      <img class="modal__img" id="shareImg" alt="การ์ดผลลัพธ์สำหรับแชร์">
+      <p class="modal__hint">มือถือ: กดค้างที่รูปเพื่อบันทึกได้เลย</p>
+      <div class="btn-row">
+        <a class="btn" id="shareDownload" download="imagine-city-card.png">ดาวน์โหลดรูป</a>
+        <button class="btn btn--ghost" id="shareNative" type="button" hidden>แชร์</button>
+        <button class="btn btn--ghost" id="shareClose" type="button">ปิด</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- กล่องดูคะแนน สำหรับทีมทดสอบ: เปิดด้วยการเติม ?debug ท้าย URL -->
+  <div class="debug" id="debug" hidden></div>
+
+  <script src="script.js?v=21"></script>
+</body>
+</html>
