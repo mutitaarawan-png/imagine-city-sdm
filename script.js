@@ -22,7 +22,7 @@ const CONFIG = {
   SUBSCRIBE_URL: "https://www.facebook.com/SPUsripatumuniversity", // ลิงก์ "สมัครรับข่าวสาร"
   START_HOUR: 23,            // นาฬิกาเริ่มที่ 23:00
   MINUTES_PER_SCENE: 5,      // ตอบหนึ่งฉาก นาฬิกาเดิน 5 นาที
-  SHARE_URL: "[ลิงก์เว็บ]",   // TODO: ใส่ลิงก์ Vercel จะไปโผล่บนการ์ดแชร์
+  SHARE_URL: "imagine-city-pearl.vercel.app", // ลิงก์เว็บ (โผล่ท้ายการ์ดแชร์)
   HASHTAG: "#ImagineCitySDM",
 };
 
@@ -1200,7 +1200,7 @@ async function makeShareCard(noImages = false) {
   c.fillText(`เรียนได้ที่ สาขา ${d.majors.join(" / ")}`, W / 2, H - 108, W - 140);
   c.fillStyle = "#7a7090";
   c.font = '400 28px "Mali", sans-serif';
-  c.fillText(`School of Digital Media · ${CONFIG.SHARE_URL} ${CONFIG.HASHTAG}`, W / 2, H - 56);
+  c.fillText(`School of Digital Media · ${CONFIG.HASHTAG}`, W / 2, H - 56);
 
   return cv;
 }
